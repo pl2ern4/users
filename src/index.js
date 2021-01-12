@@ -7,21 +7,20 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from "react-redux";
 
 import { createStore, applyMiddleware } from "redux";
-import asyncReducer from "./Reducer"; 
+import asyncReducer from "./Reducer";
 import thunk from "redux-thunk";
 
-import { BrowserRouter as Router,  Switch, Route } from 'react-router-dom';
+import { HashRouter, Switch, Route } from 'react-router-dom';
 
 const store = createStore(asyncReducer, applyMiddleware(thunk));
 ReactDOM.render(
   <Provider store={store}>
-   <Router >
-      
-     <Switch>
-     <Route path = "/users/page2/:id" component = {AboutUser} />
-      <Route path = "/" component = {App}/>
-     </Switch>
-   </Router>
+    <HashRouter basename={process.env.PUBLIC_URL}>
+        <Switch>
+          <Route path="/page2/:id" component={AboutUser} />
+          <Route path="*" component={App} />
+        </Switch>
+    </HashRouter>
   </Provider>,
   document.getElementById('root')
 );

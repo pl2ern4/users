@@ -9,7 +9,7 @@ function App() {
   useEffect(() => dispatch(fetch_user()), [])
   const handleClick = params =>{
     window.sessionStorage.setItem("data",JSON.stringify(userData[params]));
-    window.location.href = `/users/page2/${params}`;
+    window.location.href = `#/page2/${params}`;
   }
   return (
     <div className="App">
