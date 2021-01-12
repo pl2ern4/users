@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { shallowEqual, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const AboutUser = ({match:{params:{id}}}) =>{
