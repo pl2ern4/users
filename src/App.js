@@ -1,23 +1,58 @@
-import logo from './logo.svg';
-import './App.css';
+import { shallowEqual, useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { fetch_user } from './action'
 
 function App() {
+  const userData = useSelector(state => state.userData, shallowEqual);
+  const dispatch = useDispatch();
+
+  useEffect(() => dispatch(fetch_user()), [])
+  const handleClick = params =>{
+    window.sessionStorage.setItem("data",JSON.stringify(userData[params]));
+    window.location.href = `/page2/id=${params}`;
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <table style={{width:"100%"}}>
+        <thead>
+          <tr>
+          <th>
+              Id
+            </th>
+            <th>
+              Name
+            </th>
+            <th>
+              Email
+            </th>
+            <th>
+              Phone
+            </th>
+            <th>
+              Street
+            </th>
+            <th>
+              City
+            </th>
+            <th>
+              Company Name
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {userData && userData.map((obj, key) => (
+            <tr key={key} onClick={()=>handleClick(obj.id)}>
+              <td>{obj.id}</td>
+              <td>{obj.name}</td>
+              <td>{obj.email}</td>
+              <td>{obj.phone}</td>
+              <td>{obj.address.street}</td>
+              <td>{obj.address.city}</td>       
+              <td>{obj.company && obj.company.name}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

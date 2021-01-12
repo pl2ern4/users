@@ -2,12 +2,27 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import AboutUser from './AboutUser';
 import reportWebVitals from './reportWebVitals';
+import { Provider } from "react-redux";
 
+import { createStore, applyMiddleware } from "redux";
+import asyncReducer from "./Reducer"; 
+import thunk from "redux-thunk";
+
+import { BrowserRouter as Router,  Switch, Route } from 'react-router-dom';
+
+const store = createStore(asyncReducer, applyMiddleware(thunk));
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={store}>
+   <Router >
+      
+     <Switch>
+     <Route path = "/page2" component = {AboutUser} />
+      <Route path = "/" component = {App}/>
+     </Switch>
+   </Router>
+  </Provider>,
   document.getElementById('root')
 );
 
