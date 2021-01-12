@@ -18,7 +18,7 @@ ReactDOM.render(
    <Router >
       
      <Switch>
-     <Route path = "/page2/:id" component = {AboutUser} />
+     <Route path = "/users/page2/:id" component = {AboutUser} />
       <Route path = "/" component = {App}/>
      </Switch>
    </Router>
